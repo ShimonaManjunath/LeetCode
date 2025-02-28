@@ -1,0 +1,6 @@
+select a.employee_id 
+from employees a 
+where a.salary < 30000 and a.manager_id not in (
+    select  distinct employee_id from employees
+) 
+order by a.employee_id

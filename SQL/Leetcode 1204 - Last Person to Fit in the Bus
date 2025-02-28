@@ -1,0 +1,8 @@
+select person_name from 
+(
+    select a.turn,a.person_name, sum(b.weight)
+    from queue a join queue b on a.turn >= b.turn
+    group by a.turn
+    having sum(b.weight) <= 1000
+    order by a.turn desc) as qsum
+limit 1

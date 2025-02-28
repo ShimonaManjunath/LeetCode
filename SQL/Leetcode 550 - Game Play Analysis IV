@@ -1,0 +1,9 @@
+SELECT ROUND(COUNT(DISTINCT Activity.player_id) / COUNT(DISTINCT A1.player_id),2) as fraction
+FROM 
+(
+    SELECT player_id, MIN(event_date) as event_date
+    FROM Activity
+    GROUP BY player_id
+) 
+AS A1 LEFT JOIN Activity  
+ON  A1.player_id = Activity.player_id  AND DATE_ADD(A1.event_date, INTERVAL 1 DAY) = Activity.event_date
